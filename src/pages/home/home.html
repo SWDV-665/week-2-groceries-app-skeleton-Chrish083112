@@ -5,18 +5,30 @@
 </ion-header>
 
 <ion-content padding>
-  <h2>{{ title }}</h2>
+  <h3  text-center *ngIf="LoadItem().length === 0">
+    No Items Available    
+  </h3>
+  
 <!-- List of Sliding Items -->
 <ion-list >
-  <ion-item-sliding *ngFor="let Item of Items, let i = index" >
+  <ion-item-sliding *ngFor="let Item of LoadItem(), let i = index" >
     <ion-item>
       <h1>{{ Item.name }}</h1>
       <h3>{{ Item.quantity }}</h3>
     </ion-item>
     <ion-item-options>
-      <button (click) =DeleteItem(Item,i) ion-button color ="Secondary" icon-start>
+      <button (click) ="DeleteItem(Item,i)" ion-button color ="Secondary" icon-start>
         <ion-icon name= "trash" ></ion-icon>
         Done
+      </button>
+      <button (click)="ShareItem(Item, i)" ion-button color="light" icon-start>
+        <ion-icon name="share"></ion-icon>
+        Share
+      </button>
+    
+      <button (click)="editItem(Item, i)" ion-button color="primary" icon-start>
+        <ion-icon name="create"></ion-icon>
+        Edit
       </button>
     </ion-item-options>
   </ion-item-sliding>
@@ -24,7 +36,7 @@
 
 <!-- FAB Button -->
 <ion-fab  bottom right>
-    <button (click)= AddItem() ion-fab mini><ion-icon name="add"></ion-icon></button>
+    <button (click)= "AddItem()" ion-fab mini><ion-icon name="add"></ion-icon></button>
 </ion-fab>
 </ion-content>
   
